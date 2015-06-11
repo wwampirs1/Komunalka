@@ -99,10 +99,10 @@ public class DBRecortActivity extends ActionBarActivity implements AdapterView.O
             //((TextView) view).setBackgroundColor(black);
             stringToIntent = arrayAdapter.getItem(position).toString();
             if (!activityFlag) {
-                List<String> list = AdditionalMetods.array(arrayAdapter.getItem(position).toString());
+                List<String> list = AdditionalMetods.splitToArray(arrayAdapter.getItem(position).toString());
                 List<String> list2 = new ArrayList<>();
                 for (String s : list) {
-                    if (AdditionalMetods.checkString(s)) list2.add(s);
+                    if (AdditionalMetods.tryParseDouble(s)) list2.add(s);
                 }
                 tarif = new Tariff(Integer.valueOf(list2.get(0)));
             }

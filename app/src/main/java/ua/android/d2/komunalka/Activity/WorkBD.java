@@ -56,10 +56,10 @@ public class WorkBD extends ActionBarActivity implements View.OnClickListener {
                     break;
                 //изменение
                 case "ua.android.d2.komunalka.update.taruf.valua":
-                    List<String> list = AdditionalMetods.array(intentValue);
+                    List<String> list = AdditionalMetods.splitToArray(intentValue);
                     List<String> list2 = new ArrayList<>();
                     for (String parametrs : list) {
-                        if (AdditionalMetods.checkString(parametrs)) list2.add(parametrs);
+                        if (AdditionalMetods.tryParseDouble(parametrs)) list2.add(parametrs);
                     }
                     Map<Double, Double> map = new TreeMap<>();
                     map.put(Double.valueOf(list2.get(2)), Double.valueOf(list2.get(3)));

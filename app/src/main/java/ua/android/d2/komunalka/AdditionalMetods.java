@@ -20,7 +20,7 @@ public class AdditionalMetods {
         return new BigDecimal(num).setScale(col, RoundingMode.HALF_UP).doubleValue();
     }
 //разбитие на подсторку і возвращает список строк
-    public static List<String> array(String s) {
+    public static List<String> splitToArray(String s) {
         List<String> list = new ArrayList<>();
         for (String mas : s.split("\n")){
             Collections.addAll(list, mas.split(" "));
