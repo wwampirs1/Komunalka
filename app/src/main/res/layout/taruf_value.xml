@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutTarufValue">
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spTarufValue"
+        android:layout_gravity="center_horizontal"/>
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvTarufValue"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="3"
+        android:listSelector="@color/light_yellow"
+        android:nestedScrollingEnabled="false" />
+
+
+    <include layout="@layout/buttons"/>
+</LinearLayout>

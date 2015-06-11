@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:id="@+id/linealId"
+    android:orientation="vertical">
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp"
+        android:layout_gravity="center_horizontal"
+        style="@style/button_text"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            style="@style/text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/previos"
+            android:id="@+id/tvPrevision"
+
+           />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/etPrevision"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            style="@style/text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/actual"
+            android:id="@+id/tvActual"
+           />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/etActual"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+    <Button
+        style="@style/button_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action"
+        android:id="@+id/btnAction"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:background="@drawable/button_action"/>
+
+    <Button
+        android:background="@drawable/button_clear"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Очистить"
+        android:id="@+id/btnClear"
+        style="@style/button_text"
+       />
+
+    <TextView
+        style="@style/text_view"
+        android:layout_width="fill_parent"
+        android:layout_height="207dp"
+        android:id="@+id/tvResult"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical|center|center_horizontal"
+        android:textSize="30dp" />
+
+</LinearLayout>

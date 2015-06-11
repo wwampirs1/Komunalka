@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Коммунальные платежи</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="open_taruf_value">Значение тарифов</string>
+    <string name="open_taruf">Тарифи</string>
+    <string name="іnstruction">Инструкции</string>
+    <string name="exit">Выход</string>
+    <string name="previos">Предыдущие</string>
+    <string name="actual">Текущие</string>
+    <string name="action">Расчёт</string>
+    <string name="btnAction">Запись</string>
+    <string name="action_taruf_value">ua.android.d2.komunalka.taruf_value</string>
+    <string name="action_taruf">ua.android.d2.komunalka.taruf</string>
+    <string name="title_activity_bd">Тариф</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_work_bd">Заполнения</string>
+    <string name="instruction">Инструкции</string>
+    <string name="title_activity_instruction">Инструкция</string>
+</resources>
