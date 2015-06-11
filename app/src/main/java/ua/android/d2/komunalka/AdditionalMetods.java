@@ -28,7 +28,7 @@ public class AdditionalMetods {
         return list;
     }
 // проверка на число, если да то true, если exeption false
-    public static boolean checkString(String string) {
+    public static boolean tryParseDouble(String string) {
         try {
            Double.parseDouble(string);
             return  true;
