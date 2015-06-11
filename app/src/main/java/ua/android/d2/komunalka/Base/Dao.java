@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import ua.android.d2.komunalka.MyMethods;
+import ua.android.d2.komunalka.AdditionalMetods;
 import ua.android.d2.komunalka.Tariff;
 
 /**
@@ -42,7 +42,7 @@ public class Dao {
                 map.put(Double.valueOf(c.getString(2)), Double.valueOf(c.getString(3)));
             }
             t.setValue(map);
-            MyMethods.logCursor(c);
+            AdditionalMetods.logCursor(c);
             c.close();
             return t;
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class Dao {
             while (c.moveToNext()) {
                 list.add(c.getString(c.getColumnIndex(DBHelper.TCNT_NAME)));
             }
-            MyMethods.logCursor(c);
+            AdditionalMetods.logCursor(c);
             c.close();
             return list;
         } catch (Exception e) {

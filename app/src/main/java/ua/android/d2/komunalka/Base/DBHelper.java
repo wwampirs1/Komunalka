@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import ua.android.d2.komunalka.MyMethods;
+import ua.android.d2.komunalka.AdditionalMetods;
 import ua.android.d2.komunalka.Tariff;
 
 /**
@@ -113,7 +113,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 db.endTransaction();
             }
             //виводим в лог
-            MyMethods.logCursor(db.query(TABLE_NAME_TARIFF, null, null, null, null, null, null));
+            AdditionalMetods.logCursor(db.query(TABLE_NAME_TARIFF, null, null, null, null, null, null));
             try {
                 db.beginTransaction();
                 for (Tariff t : listTariff) {
@@ -132,7 +132,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 db.endTransaction();
             }
             Log.d("myLogs", "end insert tables");
-            MyMethods.logCursor(db.query(TABLE_NAME_TARIFF_VALUE, null, null, null, null, null, null));
+            AdditionalMetods.logCursor(db.query(TABLE_NAME_TARIFF_VALUE, null, null, null, null, null, null));
         } catch (SQLException e) {
             e.printStackTrace();
             Log.d("myLogs", e.toString());

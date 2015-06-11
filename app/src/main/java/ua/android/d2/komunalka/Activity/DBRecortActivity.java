@@ -17,7 +17,7 @@ import java.util.List;
 
 import ua.android.d2.komunalka.Base.DBHelper;
 import ua.android.d2.komunalka.Base.Dao;
-import ua.android.d2.komunalka.MyMethods;
+import ua.android.d2.komunalka.AdditionalMetods;
 import ua.android.d2.komunalka.R;
 import ua.android.d2.komunalka.Tariff;
 
@@ -99,10 +99,10 @@ public class DBRecortActivity extends ActionBarActivity implements AdapterView.O
             //((TextView) view).setBackgroundColor(black);
             stringToIntent = arrayAdapter.getItem(position).toString();
             if (!activityFlag) {
-                List<String> list = MyMethods.array(arrayAdapter.getItem(position).toString());
+                List<String> list = AdditionalMetods.array(arrayAdapter.getItem(position).toString());
                 List<String> list2 = new ArrayList<>();
                 for (String s : list) {
-                    if (MyMethods.checkString(s)) list2.add(s);
+                    if (AdditionalMetods.checkString(s)) list2.add(s);
                 }
                 tarif = new Tariff(Integer.valueOf(list2.get(0)));
             }

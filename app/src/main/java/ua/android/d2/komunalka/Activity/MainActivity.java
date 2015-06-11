@@ -21,7 +21,7 @@ import java.util.Map;
 
 import ua.android.d2.komunalka.Base.DBHelper;
 import ua.android.d2.komunalka.Base.Dao;
-import ua.android.d2.komunalka.MyMethods;
+import ua.android.d2.komunalka.AdditionalMetods;
 import ua.android.d2.komunalka.R;
 import ua.android.d2.komunalka.Tariff;
 
@@ -162,7 +162,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             if (check()) {
                 Tariff t = new Dao(new DBHelper(this).getReadableDatabase()).selectTariff(spListCommunal.getSelectedItem().toString());
                 if (t != null) {
-                    double rezult = MyMethods.format(Double.parseDouble(etActual.getText().toString()) - Double.parseDouble(etPrevision.getText().toString()), 2);
+                    double rezult = AdditionalMetods.format(Double.parseDouble(etActual.getText().toString()) - Double.parseDouble(etPrevision.getText().toString()), 2);
                     double bufRezult = 0.0;
                     StringBuilder st = new StringBuilder();
                     if (t.getValue().size() > 1) {
@@ -177,7 +177,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         }
                         for (int i = 0; i < mas.length; i++) {
                             try {
-                                bufRezult = MyMethods.format(rezult - mas[i + 1], 2);
+                                bufRezult = AdditionalMetods.format(rezult - mas[i + 1], 2);
                                 if (bufRezult < 0) {
                                     list.add(rezult);
                                     break;
@@ -199,7 +199,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         bufRezult = rezult * t.getOneRows();
                         st.append(rezult).append("*").append(t.getOneRows());
                     }
-                    st.append("=").append(MyMethods.format(bufRezult, 2)).append(" eд.");
+                    st.append("=").append(AdditionalMetods.format(bufRezult, 2)).append(" eд.");
                     tvRezult.setText(st);
                 }
             }

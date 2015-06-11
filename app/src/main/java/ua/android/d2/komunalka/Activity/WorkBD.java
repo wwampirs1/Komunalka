@@ -1,8 +1,8 @@
 package ua.android.d2.komunalka.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +16,7 @@ import java.util.TreeMap;
 
 import ua.android.d2.komunalka.Base.DBHelper;
 import ua.android.d2.komunalka.Base.Dao;
-import ua.android.d2.komunalka.MyMethods;
+import ua.android.d2.komunalka.AdditionalMetods;
 import ua.android.d2.komunalka.R;
 import ua.android.d2.komunalka.Tariff;
 
@@ -56,10 +56,10 @@ public class WorkBD extends ActionBarActivity implements View.OnClickListener {
                     break;
                 //изменение
                 case "ua.android.d2.komunalka.update.taruf.valua":
-                    List<String> list = MyMethods.array(intentValue);
+                    List<String> list = AdditionalMetods.array(intentValue);
                     List<String> list2 = new ArrayList<>();
                     for (String parametrs : list) {
-                        if (MyMethods.checkString(parametrs)) list2.add(parametrs);
+                        if (AdditionalMetods.checkString(parametrs)) list2.add(parametrs);
                     }
                     Map<Double, Double> map = new TreeMap<>();
                     map.put(Double.valueOf(list2.get(2)), Double.valueOf(list2.get(3)));

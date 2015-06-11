@@ -13,7 +13,7 @@ import java.util.List;
 
 
 
-public class MyMethods {
+public class AdditionalMetods {
     private static String LOG= "myLogs";;
 
     public static double format(double num, int col) {
