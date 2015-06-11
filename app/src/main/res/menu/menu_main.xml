@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/open_taruf"
+        android:orderInCategory="100"
+        android:title="@string/open_taruf" />
+    <item
+        android:id="@+id/open_taruf_value"
+        android:orderInCategory="100"
+        android:title="@string/open_taruf_value" />
+    <item
+        android:id="@+id/instruction"
+        android:orderInCategory="100"
+        android:title="@string/instruction" />
+    <item
+        android:id="@+id/exit"
+        android:orderInCategory="100"
+        android:title="@string/exit" />
+</menu>
