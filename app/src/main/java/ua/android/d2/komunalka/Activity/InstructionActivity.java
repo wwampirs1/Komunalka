@@ -1,43 +1,85 @@
 package ua.android.d2.komunalka.Activity;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.SimpleExpandableListAdapter;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import ua.android.d2.komunalka.R;
 
 public class InstructionActivity extends ActionBarActivity {
-
+    ExpandableListView elvMain;
     ListView lv;
-//инициализация
+
+    //инициализация
     private void inicialization() {
-        String[] array = new String[]{"Поле",
-                "Предыдущие - заполнить предварительным показаниям счетчика.",
-                "Текущие - заполнить актуальными показателями счетчика.",
-                "Диапазон:\n eсли в диапазоне одно значение то оно должно равняться 0;\n если в диапазоне несколько значений (2 и более), " +
-                        "то первый диапазон начинается с 0, " +
-                "а второй из числа которое явно больше предыдущего значения (например 100 тогда значения будут считаться в промежутке " +
-                        "от 0 до 100 и от 101 и до максимума или до следующего диапазона)",
-                "Значение - задается в целых, если в тарифе стоит 25.8 коп. то нужно указать 0.258 или  147.2 коп, то 1.472",
-                "Название тарифа - дайте имя новому тарифу и заполните его значение",
-                "Кнопки",
-                "Расчёт - виводит результат расчёта",
-                "Очистить - очищает поля ввода и вывода",
-                "Добавить - добавление новых тарифов или значения тарифов",
-                "Изменить - изменение информации (для нача нужно виделить поле для измения, а после нажать на кноку)",
-                "Удалить - удаления записи (для нача нужно виделить поле для удаления, а после нажать на кноку)",
-                "Запись - провести операцию записи или изменения данных",
-                "Меню",
-                "Тарифи - просмотр тарифов, возможно также добавление, изменение или удаление",
-                "Значение тарифов - просмотр значений тарифов. Каждая запись содержит:\nid - идентификатор записи,\nid_tariffs - идентификатор тарифа,\n" +
-                "diapazon - начало диапазона (если одна запись тогда она должна равна 0),\nvalue - стоймость единици измерения\n" +
-                "Возможно также добавление, изменение или удаление",
-                "Инструкции - имеет информацию о возможностях програми, инструкции пользвания програмой",
-                "Выход - выход из приложения"
-};
-        lv = (ListView) findViewById(R.id.lvInstruction);
-        lv.setAdapter(new ArrayAdapter<String>(this, R.layout.list_item_instruction, array));
+        elvMain = (ExpandableListView) findViewById(R.id.lvInstruction);
+        // коллекция для групп
+        ArrayList<Map<String, String>> groupData;
+        // коллекция для элементов одной группы
+       ArrayList<Map<String, String>> childDataItem;
+        // общая коллекция для коллекций элементов
+        ArrayList<ArrayList<Map<String, String>>> childData;
+        // в итоге получится childData = ArrayList<childDataItem>
+        // список аттрибутов группы или элемента
+        Map<String, String> m;
+        groupData = new ArrayList<Map<String, String>>();
+        for (String group : getResources().getStringArray(R.array.groupe_elements)) {
+            // заполняем список аттрибутов для каждой группы
+            m = new HashMap<String, String>();
+            m.put("groupName", group); // имя компании
+            groupData.add(m);
+        }
+        // создаем коллекцию для коллекций элементов
+        childData = new ArrayList<ArrayList<Map<String, String>>>();
+        // создаем коллекцию элементов для первой группы
+        childDataItem = new ArrayList<Map<String, String>>();
+        // заполняем список аттрибутов для каждого элемента
+        for (String field : getResources().getStringArray(R.array.field)) {
+            m = new HashMap<String, String>();
+            m.put("field", field); // название телефона
+            childDataItem.add(m);
+        }
+        // добавляем в коллекцию коллекций
+        childData.add(childDataItem);
+
+        // создаем коллекцию элементов для второй группы
+        childDataItem = new ArrayList<Map<String, String>>();
+        for (String buttons : getResources().getStringArray(R.array.buttons)) {
+            m = new HashMap<String, String>();
+            m.put("field", buttons);
+            childDataItem.add(m);
+        }
+        childData.add(childDataItem);
+
+        // создаем коллекцию элементов для третьей группы
+        childDataItem = new ArrayList<Map<String, String>>();
+        for (String menu : getResources().getStringArray(R.array.menu)) {
+            m = new HashMap<String, String>();
+            m.put("field", menu);
+            childDataItem.add(m);
+        }
+        childData.add(childDataItem);
+
+        elvMain.setAdapter(new SimpleExpandableListAdapter(
+                this,
+                groupData,
+                android.R.layout.simple_expandable_list_item_1,
+                new String[] {"groupName"},
+                new int[] {android.R.id.text1},
+                childData,
+                android.R.layout.simple_list_item_1,
+                new String[] {"field"}, // список аттрибутов элементов для чтения
+                new int[] {android.R.id.text1}));// список ID view-элементов, в которые будет помещены аттрибуты элементов
     }
 
     @Override

@@ -27,15 +27,15 @@ import ua.android.d2.komunalka.Tariff;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
-    DBHelper dbHelper;
-    Button btnAction;
-    Button btnClear;
-    TextView tvPrevision;
-    TextView tvActual;
-    TextView tvRezult;
-    EditText etPrevision;
-    EditText etActual;
-    Spinner spListCommunal;
+    private  DBHelper dbHelper;
+    private Button btnAction;
+    private Button btnClear;
+    private TextView tvPrevision;
+    private TextView tvActual;
+    private TextView tvRezult;
+    private EditText etPrevision;
+    private EditText etActual;
+    private Spinner spListCommunal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

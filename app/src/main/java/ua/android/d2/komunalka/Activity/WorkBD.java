@@ -23,15 +23,15 @@ import ua.android.d2.komunalka.Tariff;
 
 public class WorkBD extends ActionBarActivity implements View.OnClickListener {
 
-    EditText etDiapason;
-    EditText etValue;
-    EditText etNameTariff;
-    Button btnAddUpdate;
-    Tariff tarif;
-    DBHelper dbHelper;
-    boolean update;
-    boolean tariff;
-    String intentValue;
+    private EditText etDiapason;
+    private EditText etValue;
+    private EditText etNameTariff;
+    private Button btnAddUpdate;
+    private Tariff tarif;
+    private DBHelper dbHelper;
+    private boolean update;
+    private boolean tariff;
+    private String intentValue;
 
 
     @Override
@@ -39,6 +39,7 @@ public class WorkBD extends ActionBarActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         initializationComponents();
     }
+
     //инициализация компонентов
     private void initializationComponents() {
         Intent intent = getIntent();
@@ -93,13 +94,14 @@ public class WorkBD extends ActionBarActivity implements View.OnClickListener {
     private boolean check() {
         double diapazon = Double.parseDouble(etDiapason.getText().toString());
         double value = Double.parseDouble(etValue.getText().toString());
-        if (diapazon >= 0 && value >0) return true;
+        if (diapazon >= 0 && value > 0) return true;
         else {
             Toast.makeText(this, "Введите корректные данные", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
-//обработка нажатия на кнопку
+
+    //обработка нажатия на кнопку
     @Override
     public void onClick(View view) {
         Dao dao = new Dao(dbHelper.getWritableDatabase());
@@ -133,13 +135,16 @@ public class WorkBD extends ActionBarActivity implements View.OnClickListener {
                 } else {
                     try {
                         if (check()) {
-                            dao.insertTariff(Integer.parseInt(dao.getIdNameTariff(intentValue)), etDiapason.getText().toString(), etValue.getText().toString());
+                            dao.insertTariff(Integer.parseInt(dao.getIdNameTariff(intentValue)),
+                                    etDiapason.getText().toString(),
+                                    etValue.getText().toString());
                             setResult(RESULT_OK, intent);
                             finish();
                         }
                     } catch (NumberFormatException e) {
                         Toast.makeText(this, "Введите корректные данные", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
+                        Log.d("myLogs", e.toString());
                     }
                 }
             }

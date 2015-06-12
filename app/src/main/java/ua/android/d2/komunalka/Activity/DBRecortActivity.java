@@ -23,15 +23,15 @@ import ua.android.d2.komunalka.Tariff;
 
 
 public class DBRecortActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, View.OnClickListener {
-    Spinner spTarufValue;
-    ListView lvTarufValue;
-    ListView lvTaruf;
-    DBHelper dbHelper;
-    Tariff tarif;
-    String stringToIntent;
-    ArrayAdapter arrayAdapter;
-    Button btnAdd, btnUpdate, btnDelete;
-    boolean activityFlag;
+  private   Spinner spTarufValue;
+    private   ListView lvTarufValue;
+    private ListView lvTaruf;
+    private DBHelper dbHelper;
+    private Tariff tarif;
+    private String stringToIntent;
+    private ArrayAdapter arrayAdapter;
+    private Button btnAdd, btnUpdate, btnDelete;
+    private boolean activityFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,8 @@ public class DBRecortActivity extends ActionBarActivity implements AdapterView.O
         initializationComponents();
         Log.d("myLogs", "BdActivity begin onCreate");
     }
-//инициализация компонентов
+
+    //инициализация компонентов
     private void initializationComponents() {
         dbHelper = new DBHelper(this);
         Dao dao = new Dao(dbHelper.getReadableDatabase());
@@ -111,20 +112,23 @@ public class DBRecortActivity extends ActionBarActivity implements AdapterView.O
             Log.d("myLogs", e.toString());
         }
     }
+
     //инициазация lvTaruf
     void listViewTaruff() {
         Dao dao = new Dao(dbHelper.getReadableDatabase());
         arrayAdapter = new ArrayAdapter(this, R.layout.list_item, dao.selectName());
         lvTaruf.setAdapter(arrayAdapter);
     }
-//инициазация lvTarufValue
+
+    //инициазация lvTarufValue
     void listViewTariffValue() {
         Dao dao = new Dao(dbHelper.getReadableDatabase());
-        String sp = spTarufValue.getSelectedItem().toString();
         arrayAdapter = new ArrayAdapter(this, R.layout.list_item, dao.selectTariffAllColumns(spTarufValue.getSelectedItem().toString()));
         lvTarufValue.setAdapter(arrayAdapter);
+        //dao.close();
     }
-// обработка возврата результата после закрития активностей
+
+    // обработка возврата результата после закрития активностей
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -146,55 +150,67 @@ public class DBRecortActivity extends ActionBarActivity implements AdapterView.O
             Toast.makeText(this, "Неверный результат возврата", Toast.LENGTH_SHORT).show();
         }
     }
+
     //обработка нажатия на кнопки
     @Override
     public void onClick(View v) {
-        Intent intent;
+        Intent intent = null;
         Dao dao = new Dao(dbHelper.getWritableDatabase());
         switch (v.getId()) {
             case R.id.btnAdd://добавить
-
-                if (activityFlag) {
-                    intent = new Intent("ua.android.d2.komunalka.add.taruf");
-                    startActivityForResult(intent, 2);
-
-                } else {
-                    intent = new Intent("ua.android.d2.komunalka.add.taruf.valua");
-                    String s = spTarufValue.getSelectedItem().toString();
-                    intent.putExtra("stringAdapter", spTarufValue.getSelectedItem().toString());
-                    startActivityForResult(intent, 1);
-                }
+                addButton(intent);
                 break;
             case R.id.btnUpdate://именить
-                if (stringToIntent != null || tarif != null) {
-
-                    if (activityFlag) {
-                        intent = new Intent("ua.android.d2.komunalka.update.taruf");
-                        intent.putExtra("stringAdapter", stringToIntent);
-                        startActivityForResult(intent, 3);
-                    } else {
-                        intent = new Intent("ua.android.d2.komunalka.update.taruf.valua");
-                        intent.putExtra("stringAdapter", stringToIntent);
-                        startActivityForResult(intent, 1);
-                    }
-                } else
-                    Toast.makeText(this, "Виберете запись для изменения", Toast.LENGTH_SHORT).show();
+                updateButton(intent);
                 break;
             case R.id.btnDelete://удалить
-                if (stringToIntent != null || tarif != null) {
-                    if (activityFlag) {
-                        dao.deleteTariffName(dao.getIdNameTariff(stringToIntent));
-                        listViewTaruff();
-                    } else {
-                        dao.deleteTariffValue(String.valueOf(tarif.getId()));
-                        listViewTariffValue();
-                    }
-                } else
-                    Toast.makeText(this, "Виберете запись для удаления", Toast.LENGTH_SHORT).show();
+                deleteButton(dao);
                 break;
         }
         stringToIntent = null;
         tarif = null;
     }
+
+    private void addButton(Intent intent) {
+        if (activityFlag) {
+            intent = new Intent("ua.android.d2.komunalka.add.taruf");
+            startActivityForResult(intent, 2);
+
+        } else {
+            intent = new Intent("ua.android.d2.komunalka.add.taruf.valua");
+            intent.putExtra("stringAdapter", spTarufValue.getSelectedItem().toString());
+            startActivityForResult(intent, 1);
+        }
+    }
+
+    private void updateButton(Intent intent) {
+        if (stringToIntent != null || tarif != null) {
+            if (activityFlag) {
+                intent = new Intent("ua.android.d2.komunalka.update.taruf");
+                intent.putExtra("stringAdapter", stringToIntent);
+                startActivityForResult(intent, 3);
+            } else {
+                intent = new Intent("ua.android.d2.komunalka.update.taruf.valua");
+                intent.putExtra("stringAdapter", stringToIntent);
+                startActivityForResult(intent, 1);
+            }
+        } else
+            Toast.makeText(this, "Виберете запись для изменения", Toast.LENGTH_SHORT).show();
+    }
+
+    private void deleteButton(Dao dao) {
+        if (stringToIntent != null || tarif != null) {
+            if (activityFlag) {
+                dao.deleteTariffName(dao.getIdNameTariff(stringToIntent));
+                listViewTaruff();
+            } else {
+                dao.deleteTariffValue(String.valueOf(tarif.getId()));
+                listViewTariffValue();
+            }
+        } else
+            Toast.makeText(this, "Виберете запись для удаления", Toast.LENGTH_SHORT).show();
+    }
+
+
 }
 
