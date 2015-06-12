@@ -48,17 +48,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        spListCommunal.setAdapter(new ArrayAdapter<String>(this, R.layout.list_item, new Dao(new DBHelper(this).getReadableDatabase()).selectName()));
-
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         SharedPreferences sp= PreferenceManager.getDefaultSharedPreferences(this);
         currency=sp.getString("currency","грн");
+        spListCommunal.setAdapter(new ArrayAdapter<String>(this, R.layout.list_item, new Dao(new DBHelper(this).getReadableDatabase()).selectName()));
     }
 
     @Override
@@ -168,7 +162,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         saveData();
         super.onDestroy();
     }
-
     //расчёт результатов
     private void calculation() {
         try {
