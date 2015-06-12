@@ -3,6 +3,7 @@ package ua.android.d2.komunalka.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -27,7 +28,7 @@ import ua.android.d2.komunalka.Tariff;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
-    private  DBHelper dbHelper;
+    private DBHelper dbHelper;
     private Button btnAction;
     private Button btnClear;
     private TextView tvPrevision;
@@ -36,6 +37,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private EditText etPrevision;
     private EditText etActual;
     private Spinner spListCommunal;
+    private  String currency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onRestart() {
         super.onRestart();
         spListCommunal.setAdapter(new ArrayAdapter<String>(this, R.layout.list_item, new Dao(new DBHelper(this).getReadableDatabase()).selectName()));
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sp= PreferenceManager.getDefaultSharedPreferences(this);
+        currency=sp.getString("currency","грн");
     }
 
     @Override
@@ -85,6 +95,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
             case R.id.exit:
                 finish();//закрыть програму
+                break;
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -199,7 +212,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         bufRezult = rezult * t.getOneRows();
                         st.append(rezult).append("*").append(t.getOneRows());
                     }
-                    st.append("=").append(AdditionalMetods.format(bufRezult, 2)).append(" eд.");
+                    st.append("=").append(AdditionalMetods.format(bufRezult, 2)).append(" ").append(currency);
                     tvRezult.setText(st);
                 }
             }
