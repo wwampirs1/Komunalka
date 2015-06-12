@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-
 public class AdditionalMetods {
     private static String LOG= "myLogs";;
 
