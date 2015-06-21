@@ -92,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
             value.put(0.0, 0.363);
             value.put(100.0, 0.6303);
             value.put(600.0, 1.477);
-            listTariff.add(new Tariff("Електрика", j++, value));
+            listTariff.add(new Tariff("Электрика", j++, value));
 
             value = new TreeMap<Double, Double>();
             value.put(0.0, 7.20);

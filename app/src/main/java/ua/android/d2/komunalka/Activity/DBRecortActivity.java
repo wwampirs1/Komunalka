@@ -23,8 +23,8 @@ import ua.android.d2.komunalka.Tariff;
 
 
 public class DBRecortActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, View.OnClickListener {
-  private   Spinner spTarufValue;
-    private   ListView lvTarufValue;
+    private Spinner spTarufValue;
+    private ListView lvTarufValue;
     private ListView lvTaruf;
     private DBHelper dbHelper;
     private Tariff tarif;
@@ -211,6 +211,20 @@ public class DBRecortActivity extends ActionBarActivity implements AdapterView.O
             Toast.makeText(this, "Виберете запись для удаления", Toast.LENGTH_SHORT).show();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        spTarufValue=null;
+        lvTarufValue=null;
+        lvTaruf=null;
+        dbHelper.close();
+        dbHelper=null;
+        stringToIntent=null;
+        tarif=null;
+        arrayAdapter=null;
+        btnAdd=null;
+        btnUpdate=null;
+        btnDelete=null;
+    }
 }
 
